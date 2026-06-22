@@ -69,3 +69,7 @@ data "aws_ami" "ami_id" {
         values = ["/dev/sda1"]
     }
 }
+
+data "aws_ssm_parameter" "private_subnet_id" {
+    name = "${local.common_name}_private_subnet_ids"
+}
