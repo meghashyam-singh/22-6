@@ -98,19 +98,19 @@ resource "aws_route" "database" {
     nat_gateway_id = aws_nat_gateway.roboshop_nat.id
 }
 
-resource "route_table_association" "public" {
+resource "aws_route_table_association" "public" {
     count = length(var.az)
     route_table_id = aws_route_table.public.id
     subnet_id = aws_subnet.public[count.index].id
 }
 
-resource "route_table_association" "private" {
+resource "aws_route_table_association" "private" {
     count = length(var.az)
     route_table_id = aws_route_table.private.id
     subnet_id = aws_subnet.private[count.index].id
 }
 
-resource "route_table_association" "database" {
+resource "aws_route_table_association" "database" {
     count = length(var.az)
     route_table_id = aws_route_table.database.id
     subnet_id = aws_subnet.database[count.index].id
