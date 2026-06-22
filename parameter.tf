@@ -2,6 +2,7 @@ resource "aws_ssm_parameter" "public_subnet_ids" {
     name = "${local.common_name}_public_subnet_ids"
     type = "StringList"
     value = join(",", aws_subnet.public[*].id)
+    overwrite = true
 }
 
 resource "aws_ssm_parameter" "private_subnet_ids" {
