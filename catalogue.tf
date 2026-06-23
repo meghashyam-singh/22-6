@@ -6,4 +6,26 @@ resource "aws_instance" "catalogue" {
     tags = {
         Name = "${local.common_name}_catalogue"
     }
+
+    connection {
+    host = self.private_ip
+    type = "ssh"
+    user = "ec2-user"
+    private_key = file("C:/Users/megha/Downloads/17")
+    }
+
+    provisioner "file" {
+      source = "catalogue_bootstrap.sh"
+      destination = "/home/ec2-user/catalogue_bootstrap.sh"
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "chmod +x /home/ec2-user/catalogue_bootstrap.sh",
+            "sudo /home/ec2-user/catalogue_bootstrap.sh"
+        ]
+    }
 }
+
+
+************  STILL THERE TO LEARN. THIS IS 70% ONLY 30% REMAINING. FOCUS ************
